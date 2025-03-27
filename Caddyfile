@@ -10,10 +10,10 @@ kulturnav-sparql.byabbe.se {
 	}
 
 	handle_path /config/* {
-		root * thor-configuration
+		root * /opt/kulturnav-sparql/thor-configuration
 	}
 
-	root * thor
+	root * /opt/kulturnav-sparql/thor
 	file_server {
 		hide .git docs REAMDE.md .gitignore
 	}
