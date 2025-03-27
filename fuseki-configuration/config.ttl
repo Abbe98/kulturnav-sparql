@@ -11,12 +11,12 @@ PREFIX tdb2:    <http://jena.apache.org/2016/tdb#>
 
 
 :service_tdb_all  rdf:type  fuseki:Service ;
-        rdfs:label       "TDB2 fornpunkt" ;
+        rdfs:label       "TDB2 kulturnav" ;
         fuseki:endpoint  [ fuseki:operation  fuseki:gsp-rw ] ;
         fuseki:endpoint  [ fuseki:name       "sparql" ;
                            fuseki:operation  fuseki:query
                          ] ;
-        fuseki:name      "fornpunkt" ;
+        fuseki:name      "kulturnav" ;
         fuseki:dataset   :tdb_dataset_readwrite .
 
 

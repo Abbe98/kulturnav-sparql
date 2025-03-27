@@ -1,6 +1,6 @@
 # FornPunkt SPARQL
 
-This repository contains various resources related to FornPunkt's SPARQL service, such as editor configuration, the public query library, Graph Store HTTP Protocol utilities, and Caddy server configuration.
+This repository contains various resources for serving Kulturnav datasets over SPARQL. It includes things such as editor configuration, query library, Graph Store HTTP Protocol utilities, and Caddy server configuration.
 
 ## Setup your editor
 
@@ -8,6 +8,7 @@ This repository contains various resources related to FornPunkt's SPARQL service
 
  - Fuseki running on `localhost:3030` using the `config.ttl` configuration
  - Caddy installed
+ - Python (no third-party packages required)
 
 ### Setup
 
@@ -16,11 +17,9 @@ This repository contains various resources related to FornPunkt's SPARQL service
 2. Run `caddy` from the root directory
 3. Done!
 
-Optionally if you want to pull data directly for FornPunkt's Export API you should also set the `FP_EXPORT_ACCESS_TOKEN` environment variable to an access token with read rights.
-
 ## Getting RDF
 
-FornPunkts RDF can be retrieved by sending an HTTP request with an `Accept: application/ld+json` header to any RDF capable URL on fornpunkt.se or by signing into FornPunkt and using the "Export" tool. <a href="https://fornpunkt.se/data/fornpunkt-json-ld-api">See the API documentation for more information.</a>
+The RDF data sources are configured in `scrips/download-export-files.py`.
 
 ## Graph Store HTTP Protocol utilities
 
@@ -31,17 +30,20 @@ The `scripts` folder contains several Shell scripts for working with the Graph S
 Add a new file to the `query-library/src` directory and format your file as shown below. Both a title and tags are mandatory:
 
 ```
-#title: List sites with a given title
-#tags: sites
+#title: Count people by gender
+#tags: person,gender
 
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
 
-PREFIX schema: <http://schema.org/>
+SELECT ?gender (COUNT(?person) AS ?person_count) WHERE {
+  ?person a <http://schema.org/Person> .
+  ?person skos:prefLabel ?name .
+  ?person foaf:gender ?gender .
+} 
 
-SELECT * WHERE {
-  ?site a schema:CreativeWork ;
-        schema:name 'Stensättning'@sv .
-}
-
+GROUP BY ?gender
 ```
 
 You can generate a query library JSON file by running the following from the root directory:

@@ -1,0 +1,14 @@
+#title: Count people by gender
+#tags: person,gender
+
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+
+SELECT ?gender (COUNT(?person) AS ?person_count) WHERE {
+  ?person a <http://schema.org/Person> .
+  ?person skos:prefLabel ?name .
+  ?person foaf:gender ?gender .
+} 
+
+GROUP BY ?gender

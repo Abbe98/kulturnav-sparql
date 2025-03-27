@@ -1,4 +1,4 @@
-sparql.fornpunkt.se {
+kulturnav-sparql.byabbe.se {
 	encode gzip
 
 	@missing_user_agent header !User-Agent
@@ -19,21 +19,12 @@ sparql.fornpunkt.se {
 	}
 
 	handle_path /query {
-		rewrite * /fornpunkt/sparql
+		rewrite * /kulturnav/sparql
 		reverse_proxy http://localhost:3030
 	}
 
 	handle_path /ping {
 		rewrite * /$/ping
 		reverse_proxy http://localhost:3030
-	}
-
-	# Redirect for security.txt, all  of .well-known is just a bonus
-	handle_path /.well-known/* {
-		redir https://fornpunkt.se{uri}
-	}
-
-	handle_path /security.txt {
-		redir https://fornpunkt.se/.well-known/security.txt
 	}
 }
