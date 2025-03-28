@@ -18,8 +18,8 @@ for file in os.listdir("."):
         os.remove(file)
 
 files = {
-    "arkitekter.rdf": "https://kulturnav.org/exportRdfxml/search/entity.dataset:2b7670e1-b44e-4064-817d-27834b03067c", # Arkitekter verksamma i Sverige
-    "byggnader.rdf": "https://kulturnav.org/exportRdfxml/search/entity.dataset:1f23ddae-5579-4e3e-bf59-a29524e4f926" # Byggnader i Sverige
+    "arkitekter.rdf": "https://kulturnav.org/exportRdfxml/search/entity.dataset:2b7670e1-b44e-4064-817d-27834b03067c/0/10000", # Arkitekter verksamma i Sverige
+    "byggnader.rdf": "https://kulturnav.org/exportRdfxml/search/entity.dataset:1f23ddae-5579-4e3e-bf59-a29524e4f926/0/10000" # Byggnader i Sverige
 }
 
 for file, url in files.items():
