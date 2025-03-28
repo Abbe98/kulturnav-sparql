@@ -1,0 +1,7 @@
+#title: Totala antalet same-as länkar
+
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+SELECT (COUNT(?external_id) AS ?wikidata_count) WHERE {
+  [] owl:sameAs ?external_id .
+} LIMIT 200

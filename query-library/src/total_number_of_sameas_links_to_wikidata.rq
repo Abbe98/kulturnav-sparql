@@ -1,0 +1,9 @@
+#title: Totala antalet same-as länkar till Wikidata
+
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+SELECT (COUNT(?external_id) AS ?wikidata_count) WHERE {
+  [] owl:sameAs ?external_id .
+
+  FILTER(CONTAINS(STR(?external_id), "http://www.wikidata.org/entity/")) 
+} LIMIT 200

@@ -1,0 +1,12 @@
+#title: Personer med en extern identifierare till Wikidata
+
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+SELECT * WHERE {
+  ?person a <http://schema.org/Person> .
+  ?person skos:prefLabel ?name .
+  ?person owl:sameAs ?external_id .
+  
+  FILTER(CONTAINS(STR(?external_id), "http://www.wikidata.org/entity/"))
+} LIMIT 200

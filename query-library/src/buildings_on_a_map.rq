@@ -1,0 +1,14 @@
+#defaultView:Map
+#title: Rita ut byggnader på en karta
+
+PREFIX schema: <http://schema.org/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX knav-property: <http://kulturnav.org/schema/property/>
+
+SELECT * WHERE {
+  ?thing a owl:Thing . # byggnader
+  ?thing knav-property:localizedObject.geometry ?geometry .
+  ?geometry schema:longitude ?lon .
+  ?geometry schema:latitude ?lat .
+  ?thing schema:name ?geometryTitle .
+} LIMIT 200

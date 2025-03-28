@@ -1,0 +1,20 @@
+#title: Personer med en bild i Wikidata
+#defaultView:ImageGrid
+
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX schema: <http://schema.org/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+
+SELECT * WHERE {
+  ?person a <http://schema.org/Person> .
+  ?person skos:prefLabel ?name .
+  ?person owl:sameAs ?external_id .
+
+  # owl:sameAs pekar inte nödvändigtvis på Wikidata så vi filtrerar ut allt som pekar på en annan källa
+  FILTER(CONTAINS(STR(?external_id), "http://www.wikidata.org/entity/")) 
+  
+  SERVICE <https://query.wikidata.org/sparql> {
+    ?external_id wdt:P18 ?thumbnail .
+  }
+} LIMIT 200
