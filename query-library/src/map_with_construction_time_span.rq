@@ -1,0 +1,22 @@
+#defaultView:Map
+#title: Karta med hur många år det tog att bygga byggnaden för Kepler.gl
+
+PREFIX schema: <http://schema.org/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX knav-property: <http://kulturnav.org/schema/property/>
+PREFIX time: <http://www.w3.org/2006/time#>
+
+SELECT ?geometryTitle ?lat ?lon ?constructionTimeStart ?normalizedTimespan WHERE {
+  ?thing a owl:Thing ;
+         knav-property:localizedObject.geometry ?geometry .
+  ?geometry schema:longitude ?lon ;
+            schema:latitude ?lat .
+  ?thing schema:name ?geometryTitle ;
+         knav-property:construction.time ?constructionTime .
+  ?constructionTime time:hasBeginning ?constructionStart ;
+                    time:hasEnd ?constructionEnd .
+  
+  BIND(YEAR(?constructionEnd) - YEAR(?constructionStart) AS ?constructionTimespan)
+  BIND(IF(?constructionTimespan = 0, 1, ?constructionTimespan) AS ?normalizedTimespan)
+  
+} LIMIT 100

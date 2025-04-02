@@ -1,0 +1,15 @@
+#title: Byggnader som Erik Dahlbergh varit arkitekt för
+
+PREFIX schema: <http://schema.org/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX knav-property: <http://kulturnav.org/schema/property/>
+PREFIX time: <http://www.w3.org/2006/time#>
+
+SELECT ?thing ?name WHERE {  
+  ?thing a owl:Thing ;
+         schema:name ?name ;
+         knav-property:building.agent ?agentNode .
+
+  ?agentNode knav-property:relation.agentRole <http://kulturnav.org/eb04f87d-71e1-49ef-8873-44c8265746ac> ; # Arkitekt
+             knav-property:namedObject.agent.agent <http://kulturnav.org/ec717f5b-e17e-40ae-ae2b-5edd9a1c2a55> . # Erik Dahlbergh
+}

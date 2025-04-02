@@ -1,0 +1,22 @@
+#defaultView:Map
+#title: Karta med byggår för Kepler.gl
+
+PREFIX schema: <http://schema.org/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX knav-property: <http://kulturnav.org/schema/property/>
+PREFIX time: <http://www.w3.org/2006/time#>
+
+SELECT ?geometryTitle ?lat ?lon ?constructionTimeStart ?constructionTimeEnd WHERE {
+  ?thing a owl:Thing ;
+         knav-property:localizedObject.geometry ?geometry .
+  ?geometry schema:longitude ?lon ;
+            schema:latitude ?lat .
+  ?thing schema:name ?geometryTitle ;
+         knav-property:construction.time ?constructionTime .
+  ?constructionTime time:hasBeginning ?constructionStart ;
+                    time:hasEnd ?constructionEnd .
+
+  # Vi formaterar åren som datum så att Kepler.gl känner igen datatypen
+  BIND(REPLACE(STR(?constructionStart), 'Z', '-01-01 00:00:00') AS ?constructionTimeStart)
+  BIND(REPLACE(STR(?constructionEnd), 'Z', '-01-01 00:00:00') AS ?constructionTimeEnd)
+} LIMIT 100
