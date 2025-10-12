@@ -2,6 +2,9 @@
     "sparql_endpoint": "/query",
     "query_library_endpoint": "/config/queries.json",
     "title": "KulturNav",
+    "documentation_paragraphs": [
+        "Denna SPARQL-tjänst innehåller KulturNav-datamängderna Arkitekter verksamma i Sverige och Byggnader i Sverige."
+    ],
     "demo_tour": {
         "demo_query": "PREFIX schema: <http://schema.org/>\n\nSELECT * WHERE {\n   ?s schema:\n}",
         "demo_query_cursor_position": {
