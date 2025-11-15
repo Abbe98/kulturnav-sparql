@@ -19,7 +19,9 @@ for file in os.listdir("."):
 
 files = {
     "arkitekter.rdf": "https://kulturnav.org/exportRdfxml/search/entity.dataset:2b7670e1-b44e-4064-817d-27834b03067c/0/10000", # Arkitekter verksamma i Sverige
-    "byggnader.rdf": "https://kulturnav.org/exportRdfxml/search/entity.dataset:1f23ddae-5579-4e3e-bf59-a29524e4f926/0/10000" # Byggnader i Sverige
+    "byggnader.rdf": "https://kulturnav.org/exportRdfxml/search/entity.dataset:1f23ddae-5579-4e3e-bf59-a29524e4f926/0/10000", # Byggnader i Sverige
+    "kommuner.rdf": "https://kulturnav.org/exportRdfxml/search/entity.dataset:b96a2c92-971e-464d-9f6a-1a0b82a44800", #  Sveriges kommuner
+    "lander.rdf": "https://kulturnav.org/exportRdfxml/search/entity.dataset:ecb89f2c-c4cf-4313-b798-72d9ae058cf6" # Länder (Externa data)
 }
 
 for file, url in files.items():
